@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-template
+collate DLTS and DC3 lists of papyrological images
 """
 
 import argparse
