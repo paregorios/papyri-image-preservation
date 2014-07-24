@@ -15,6 +15,7 @@ import traceback
 DEFAULTLOGLEVEL = logging.WARNING
 
 REXJP2 = re.compile("\.jp2$")
+REXDLTSFN = re.compile("[^/]+\.[a-zA-Z]{3,4}$")
 
 def arglogger(func):
     """
@@ -55,6 +56,20 @@ def main (args):
     logger.debug("first item before replace: '%s'" % data_dc3[0])
     data_dc3 = [REXJP2.sub('', d) for d in data_dc3]
     logger.debug("first item after replace: '%s'" % data_dc3[0])
+
+    logger.debug("capturing filenames from DLTS data")
+    logger.debug("first item before replace: '%s'" % data_dlts[0])
+    results = []
+    for d in data_dlts:
+        m = REXDLTSFN.search(d)
+        if m:
+            results.append(m.group())
+        else:
+            logger.warning("failed to match a filename in DLTS line '%s': IGNORED!" % d)
+    data_dlts = results
+    logger.debug("first item after replace: '%s'" % data_dlts[0])
+
+
 
 
 
