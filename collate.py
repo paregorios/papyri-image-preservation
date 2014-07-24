@@ -44,8 +44,8 @@ if __name__ == "__main__":
         parser.add_argument ("-l", "--loglevel", type=str, help="desired logging level (case-insensitive string: DEBUG, INFO, WARNING, ERROR" )
         parser.add_argument ("-v", "--verbose", action="store_true", default=False, help="verbose output (logging level == INFO")
         parser.add_argument ("-vv", "--veryverbose", action="store_true", default=False, help="very verbose output (logging level == DEBUG")
-        # example positional argument:
-        # parser.add_argument('integers', metavar='N', type=int, nargs='+', help='an integer for the accumulator')
+        parser.add_argument('filename_dc3', type=str, help="filename with path for the DC3 list of files")
+        parser.add_argument('filename_dlts', type=str, help="filename with path for the DLTS list of files")
         args = parser.parse_args()
         if args.loglevel is not None:
             args_log_level = re.sub('\s+', '', args.loglevel.strip().upper())
