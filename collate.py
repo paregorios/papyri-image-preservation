@@ -14,6 +14,8 @@ import traceback
 
 DEFAULTLOGLEVEL = logging.WARNING
 
+REXJP2 = re.compile("\.jp2$")
+
 def arglogger(func):
     """
     decorator to log argument calls to functions
@@ -35,15 +37,25 @@ def main (args):
 
     logger.debug("reading DLTS list: '%s'" % args.filename_dlts)
     f = open(args.filename_dlts, 'r')
-    data_dlts = f.read()
+    data_dlts = f.readlines()
     f.close()
     logger.debug("read %s lines" % len(data_dlts))
+    logger.debug("chomping lines in DLTS list")
+    data_dlts = [d.rstrip() for d in data_dlts]
 
     logger.debug("reading DC3 list: '%s'" % args.filename_dc3)
     f = open(args.filename_dc3, 'r')
-    data_dc3 = f.read()
+    data_dc3 = f.readlines()
     f.close()
     logger.debug("read %s lines" % len(data_dlts))
+    logger.debug("chomping lines in DC3 list")
+    data_dc3 = [d.rstrip() for d in data_dc3]
+
+    logger.debug("removing filename extensions from DC data")
+    logger.debug("first item before replace: '%s'" % data_dc3[0])
+    data_dc3 = [REXJP2.sub('', d) for d in data_dc3]
+    logger.debug("first item after replace: '%s'" % data_dc3[0])
+
 
 
 
