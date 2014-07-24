@@ -33,6 +33,19 @@ def main (args):
     """
     logger = logging.getLogger(sys._getframe().f_code.co_name)
 
+    logger.debug("reading DLTS list: '%s'" % args.filename_dlts)
+    f = open(args.filename_dlts, 'r')
+    data_dlts = f.read()
+    f.close()
+    logger.debug("read %s lines" % len(data_dlts))
+
+    logger.debug("reading DC3 list: '%s'" % args.filename_dc3)
+    f = open(args.filename_dc3, 'r')
+    data_dc3 = f.read()
+    f.close()
+    logger.debug("read %s lines" % len(data_dlts))
+
+
 
 if __name__ == "__main__":
     log_level = DEFAULTLOGLEVEL
